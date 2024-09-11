@@ -3,9 +3,11 @@ using Pcf.Preference.Core.Repositories;
 using Pcf.Preference.DataAccess;
 using Pcf.Preference.DataAccess.Data;
 using Pcf.Preference.DataAccess.Repositories;
+using Pcf.Preference.WebHost.Cache;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 //builder.services.AddScoped<INotificationGateway, NotificationGateway>();
 builder.Services.AddScoped<IDbInitializer, EfDbInitializer>();

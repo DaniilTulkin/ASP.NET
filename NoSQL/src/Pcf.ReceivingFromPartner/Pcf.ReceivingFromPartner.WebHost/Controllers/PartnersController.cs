@@ -1,15 +1,15 @@
-﻿﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pcf.ReceivingFromPartner.Core.Abstractions.Gateways;
+using Pcf.ReceivingFromPartner.Core.Abstractions.Repositories;
+using Pcf.ReceivingFromPartner.Core.Domain;
+using Pcf.ReceivingFromPartner.WebHost.Mappers;
+using Pcf.ReceivingFromPartner.WebHost.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
- using Pcf.ReceivingFromPartner.WebHost.Models;
- using Pcf.ReceivingFromPartner.Core.Abstractions.Gateways;
- using Pcf.ReceivingFromPartner.Core.Abstractions.Repositories;
- using Pcf.ReceivingFromPartner.Core.Domain;
- using Pcf.ReceivingFromPartner.WebHost.Mappers;
 
- namespace Pcf.ReceivingFromPartner.WebHost.Controllers
+namespace Pcf.ReceivingFromPartner.WebHost.Controllers
 {
     /// <summary>
     /// Партнеры
@@ -24,18 +24,21 @@ using Microsoft.AspNetCore.Mvc;
         private readonly INotificationGateway _notificationGateway;
         private readonly IGivingPromoCodeToCustomerGateway _givingPromoCodeToCustomerGateway;
         private readonly IAdministrationGateway _administrationGateway;
+        private readonly IPreferenceGateway _preferenceGateway;
 
         public PartnersController(IRepository<Partner> partnersRepository,
             IRepository<Preference> preferencesRepository, 
             INotificationGateway notificationGateway,
             IGivingPromoCodeToCustomerGateway givingPromoCodeToCustomerGateway,
-            IAdministrationGateway administrationGateway)
+            IAdministrationGateway administrationGateway,
+            IPreferenceGateway preferenceGateway)
         {
             _partnersRepository = partnersRepository;
             _preferencesRepository = preferencesRepository;
             _notificationGateway = notificationGateway;
             _givingPromoCodeToCustomerGateway = givingPromoCodeToCustomerGateway;
             _administrationGateway = administrationGateway;
+            _preferenceGateway = preferenceGateway;
         }
 
         /// <summary>
@@ -317,7 +320,8 @@ using Microsoft.AspNetCore.Mvc;
             }
 
             //Получаем предпочтение по имени
-            var preference = await _preferencesRepository.GetByIdAsync(request.PreferenceId);
+            // var preference = await _preferencesRepository.GetByIdAsync(request.PreferenceId);
+            var preference = await _preferenceGateway.GetPreferenceByIdAsync(request.PreferenceId);
 
             if (preference == null)
             {
@@ -325,6 +329,8 @@ using Microsoft.AspNetCore.Mvc;
             }
 
             PromoCode promoCode = PromoCodeMapper.MapFromModel(request, preference, partner);
+            promoCode.EndDate = promoCode.EndDate.ToUniversalTime();
+            promoCode.BeginDate = promoCode.BeginDate.ToUniversalTime();
             partner.PromoCodes.Add(promoCode);
             partner.NumberIssuedPromoCodes++;
 

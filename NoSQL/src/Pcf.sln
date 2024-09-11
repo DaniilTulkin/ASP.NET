@@ -40,14 +40,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pcf.Preference", "Pcf.Preference", "{049D8C8E-C976-4B94-8207-BB29A2CCDB22}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
-		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pcf.Preference.WebHost", "Pcf.Preference.WebHost\Pcf.Preference.WebHost.csproj", "{2140575B-42AC-468C-991A-9712E098C7C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pcf.Preference.WebHost", "Pcf.Preference.WebHost\Pcf.Preference.WebHost.csproj", "{2140575B-42AC-468C-991A-9712E098C7C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pcf.Preference.Core", "Pcf.Preference.Core\Pcf.Preference.Core.csproj", "{A522AF60-A4D3-4216-A32B-D23843FC2C51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pcf.Preference.Core", "Pcf.Preference.Core\Pcf.Preference.Core.csproj", "{A522AF60-A4D3-4216-A32B-D23843FC2C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pcf.Preference.DataAccess", "Pcf.Preference.DataAccess\Pcf.Preference.DataAccess.csproj", "{B71742F7-48EB-4A87-A62D-69531F77EA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pcf.Preference.DataAccess", "Pcf.Preference.DataAccess\Pcf.Preference.DataAccess.csproj", "{B71742F7-48EB-4A87-A62D-69531F77EA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
