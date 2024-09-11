@@ -9,10 +9,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Pcf.Preference/Pcf.Preference.WebHost.csproj", "Pcf.Preference/"]
+COPY ["Pcf.Preference.WebHost/Pcf.Preference.WebHost.csproj", "Pcf.Preference/"]
 COPY ["Pcf.Preference.DataAccess/Pcf.Preference.DataAccess.csproj", "Pcf.Preference.DataAccess/"]
 COPY ["Pcf.Preference.Core/Pcf.Preference.Core.csproj", "Pcf.PreferenceCore/"]
-RUN dotnet restore "./Pcf.Preference/Pcf.Preference.WebHost.csproj"
+RUN dotnet restore "./Pcf.Preference.WebHost/Pcf.Preference.WebHost.csproj"
 COPY . .
 WORKDIR "/src/Pcf.Preference"
 RUN dotnet build "./Pcf.Preference.WebHost.csproj" -c $BUILD_CONFIGURATION -o /app/build
